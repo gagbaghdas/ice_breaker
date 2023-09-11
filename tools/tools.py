@@ -1,9 +1,10 @@
 from langchain.utilities import SerpAPIWrapper
 
+
 class CustomSerpAPIWrapperForLinkedinURL(SerpAPIWrapper):
     def __init__(self):
         super(CustomSerpAPIWrapperForLinkedinURL, self).__init__()
-    
+
     @staticmethod
     def _process_response(res: dict) -> str:
         """Process response from SerpAPI."""
@@ -99,9 +100,21 @@ class CustomSerpAPIWrapperForLinkedinURL(SerpAPIWrapper):
         else:
             return "No good search result found"
 
+
 def get_profile_url(text: str) -> str:
     """
     Searches for Linkedin Profile Page
+    """
+
+    search = CustomSerpAPIWrapperForLinkedinURL()
+    res = search.run(f"{text}")
+
+    return res
+
+
+def get_twitter_username(text: str) -> str:
+    """
+    Searches for Twitter Profile Page
     """
 
     search = CustomSerpAPIWrapperForLinkedinURL()
